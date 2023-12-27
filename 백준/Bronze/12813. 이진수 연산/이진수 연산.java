@@ -5,6 +5,7 @@ public class Main {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		
 		String[] a = br.readLine().split("");
 		String[] b = br.readLine().split("");
@@ -26,10 +27,8 @@ public class Main {
 			notb.append(bn ^ 1);
 		}
 		
-		System.out.println(and);
-		System.out.println(or);
-		System.out.println(xor);
-		System.out.println(nota);
-		System.out.println(notb);
+		sb.append(and).append("\n").append(or).append("\n").append(xor).append("\n").append(nota).append("\n").append(notb);
+		
+		System.out.println(sb);
 	}
 }
