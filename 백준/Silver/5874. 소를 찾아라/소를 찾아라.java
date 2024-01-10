@@ -7,13 +7,13 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		List<Integer> list = new LinkedList<>();
-		String[] str = br.readLine().split("");
+		String str = br.readLine();
 		int ycount = 0;
 		
-		for (int i = 0; i < str.length - 1; i++) {
-			if (str[i].equals("(") && str[i + 1].equals("(")) {
+		for (int i = 0; i < str.length() - 1; i++) {
+			if (str.charAt(i) == '(' && str.charAt(i + 1) == '(') {
 				list.add(1); // x
-			} else if (str[i].equals(")") && str[i + 1].equals(")")) {
+			} else if (str.charAt(i) == ')' && str.charAt(i + 1) == ')') {
 				list.add(2); // y
 				ycount++;
 			}
