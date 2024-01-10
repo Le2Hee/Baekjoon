@@ -13,8 +13,7 @@ public class Main {
 		for (int i = 0; i < str.length - 1; i++) {
 			if (str[i].equals("(") && str[i + 1].equals("(")) {
 				list.add(1); // x
-			}
-			if (str[i].equals(")") && str[i + 1].equals(")")) {
+			} else if (str[i].equals(")") && str[i + 1].equals(")")) {
 				list.add(2); // y
 				ycount++;
 			}
