@@ -3,37 +3,53 @@ import java.util.*;
 
 public class Main {
 	
+	static char[] arr;
+	static int[] num;
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
-		char[] arr = br.readLine().toCharArray();
-		
-		int zero = 0;
-		int one = 0;
+		arr = br.readLine().toCharArray();
+		num = new int[arr.length];
 		
 		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] == '1') {
-				one++;
-			} else {
-				zero++;
+			if (num[i] == 0) {
+				if (arr[i] == '1') {
+					num[i] = 2;
+					func(i, 1);
+				} else {
+					num[i] = 1;
+					func(i, 0);
+				}
 			}
 		}
 		
-		zero /= 2;
-		one /= 2;
-		
-		for (int i = 0; i < zero; i++) {
-			sb.append("0");
-		}
-		
-		for (int i = 0; i < one; i++) {
-			sb.append("1");
+		for (int i = 0; i < arr.length; i++) {
+			if (num[i] == 1) {
+				sb.append(arr[i]);
+			}
 		}
 		
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
 		br.close();
+	}
+	
+	private static void func(int index, int n) {
+		for (int i = arr.length - 1; i > index; i--) {
+			if (n == 0) {
+				if (arr[i] == '0' && num[i] == 0) {
+					num[i] = 2;
+					break;
+				}
+			} else {
+				if (arr[i] == '1' && num[i] == 0) {
+					num[i] = 1;
+					break;
+				}
+			}
+		}
 	}
 }
