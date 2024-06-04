@@ -10,37 +10,43 @@ public class Main {
 		int n = Integer.parseInt(st.nextToken()); // 학생 수
 		int k = Integer.parseInt(st.nextToken()); // 확인하는 인원 수
 		
-		List<Integer> list = new LinkedList<>(); // 학생을 저장할 리스트
+		Queue<Integer> qu = new LinkedList<>(); // 학생을 저장할 큐
 		
 		st = new StringTokenizer(br.readLine());
 		while (n-- > 0) {
-			list.add(Integer.parseInt(st.nextToken()));
+			qu.add(Integer.parseInt(st.nextToken()));
 		}
 		
-		int count = 0, oindex, tindex; // 총 점호시간, 1학년 인덱스, 2학년 인덱스
-		while(list.size() > 0) {
+		Deque<Integer> sub = new LinkedList<>();
+		int count = 0, num, size;
+		while (true) {
 			count++;
-			oindex = -1;
-			tindex = -1;
+			num = 0;
+			size = qu.size();
 			
-			for (int i = 0; i < (list.size() < k ? list.size() : k); i++) {
-				if (list.get(i) == 1 && oindex == -1) {
-					oindex = i;
-				} else if (list.get(i) == 2 && tindex == -1) {
-					tindex = i;
+			while (sub.size() < k) {
+				if (qu.size() == 0) {
+					break;
 				}
-			}
-			
-			if (oindex != -1) { // 확인하는 인원 중 1학년이 있다면
-				list.remove(oindex);
 				
-				if (oindex < tindex) { // 인덱스가 작다면 remove시 인덱스가 줄어든다.
-					tindex--;
-				}
+				num = qu.poll();
+				
+				if (num == 1) {
+					sub.addFirst(num);
+				 } else {
+					 sub.addLast(num);
+				 }
 			}
 			
-			if (tindex != -1) { // 확인하는 인원 중 2학년이 있다면
-				list.remove(tindex);
+			if (sub.peekFirst() == sub.peekLast()) {
+				sub.pollFirst();
+			} else {
+				sub.pollFirst();
+				sub.pollLast();
+			}
+			
+			if (sub.size() == 0 && qu.size() == 0) {
+				break;
 			}
 		}
 		
