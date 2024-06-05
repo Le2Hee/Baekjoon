@@ -12,33 +12,38 @@ public class Main {
 		int m = Integer.parseInt(st.nextToken()); // 운영진이 원하는 길이
 		char[] arr = br.readLine().toCharArray(); // 문자열
 		
-		int acount = 0;
+		List<Integer> aindexs = new LinkedList<>();
 		for (int i = 0 ; i < n - 1; i++) {
 			if (arr[i] == 'A') {
-				acount++;
+				aindexs.add(i);
 			}
 		}
 		
-		if (acount < 2) {
+		if (aindexs.size() < 2) {
 			sb.append("NO");
 		} else {
-			m -= 3;
+			int subm = m - 3;
 			
-			List<Integer> aindexs = new LinkedList<>();
-			for (int i = 0; i < n; i++) {
-				if (arr[i] == 'A') {
-					aindexs.add(i);
-				}
-			}
-			
-			if (aindexs.get(aindexs.size() - 2) < m) {
+			if (aindexs.get(aindexs.size() - 2) < subm) {
 				sb.append("NO");
 			} else {
-				for (int i = aindexs.get(aindexs.size() - 2) - m; i < aindexs.get(aindexs.size() - 2); i++) {
+				for (int i = aindexs.get(aindexs.size() - 2) - subm; i < aindexs.get(aindexs.size() - 2); i++) {
 					sb.append(arr[i]);
 				}
 				
-				sb.append("AA").append(arr[n - 1]);
+				sb.append("AA");
+				
+				for (int i = aindexs.get(aindexs.size() - 1) + 1; i < arr.length; i++) {
+					if (arr[i] != 'A' && arr[i] != 'E' && arr[i] != 'I' && arr[i] != 'O' && arr[i] != 'U') {
+						sb.append(arr[i]);
+						break;
+					}
+				}
+				
+				if (sb.length() != m) {
+					sb = new StringBuilder();
+					sb.append("NO");
+				}
 			}
 		}
 		
