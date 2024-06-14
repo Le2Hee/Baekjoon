@@ -64,7 +64,14 @@ public class Main {
 				// 한번도 가지 않고, 점프하는 거리보다 같거나 작으면서 같은 보드블록이라면
 				if (!visit[i][j] && dis <= jump && map[nowy][nowx] == map[i][j]) {
 					function(i, j);
+				} else if (dis > jump && nowx < j) { // 점프할 수 없는 거리라면
+					break;
 				}
+			}
+			
+			// 점프할 수 없는 거리라면
+			if (Math.abs(nowy - i) > jump && nowy < i) {
+				break;
 			}
 		}
 	}
