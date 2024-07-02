@@ -3,48 +3,26 @@ import java.util.*;
 
 public class Main {
 	
-	static int m;
-	static String str;
-	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException { // ○
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int n = Integer.parseInt(br.readLine()) - 1;
-		m = Integer.parseInt(br.readLine());
-		str = br.readLine();
+		int n = Integer.parseInt(br.readLine());
+		int m = Integer.parseInt(br.readLine());
+		char[] s = br.readLine().toCharArray();
 		
-		StringBuilder sub = new StringBuilder();
-		sub.append("IOI");
-		
-		while (n-- > 0) {
-			sub.append("OI");
-		}
-		
-		String s = sub.toString();
-		
-		int plus = 0;
-		int start = 0;
-		int end = s.length();
-		int count = 0;
-		
-		while (true) {
-			if (str.substring(start, end).equals(s)) {
-				count++;
-				start += 2;
-				end += 2;
-			} else {
-				plus = find(start);
+		int count = 0, sub = 0;
+		for (int i = 1; i < m - 1; i++) {
+			if (s[i - 1] == 'I' && s[i] == 'O' && s[i + 1] == 'I') {
+				sub++;
 				
-				if (plus == -1) {
-					break;
-				} else {
-					start = plus;
-					end = start + s.length();
+				if (sub == n) {
+					count++;
+					sub--;
 				}
-			}
-			
-			if (end >= m) {
-				break;
+				
+				i++;
+			} else {
+				sub = 0;
 			}
 		}
 		
@@ -52,15 +30,5 @@ public class Main {
 		bw.flush();
 		bw.close();
 		br.close();
-	}
-	
-	private static int find(int index) {
-		for (int i = index + 1; i < m; i++) {
-			if (str.charAt(i) == 'I') {
-				return i;
-			}
-		}
-		
-		return -1;
 	}
 }
