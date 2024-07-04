@@ -22,8 +22,8 @@ public class Main {
 			check = !check;
 		}
 		
-		for (int num : qu) {
-			sb.append(num).append(" ");
+		while (!qu.isEmpty()) {
+			sb.append(qu.poll()).append(" ");
 		}
 		
 		bw.write(sb.toString());
