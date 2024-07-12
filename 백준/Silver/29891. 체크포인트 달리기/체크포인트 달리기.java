@@ -11,7 +11,7 @@ public class Main {
 		int k = Integer.parseInt(st.nextToken()); // 한 번에 체크가능한 포인트 개수
 		
 		PriorityQueue<Integer> pos = new PriorityQueue<>(Collections.reverseOrder());
-		PriorityQueue<Integer> neg = new PriorityQueue<>(Collections.reverseOrder());
+		PriorityQueue<Integer> neg = new PriorityQueue<>();
 		int num;
 		
 		while (n-- > 0) {
