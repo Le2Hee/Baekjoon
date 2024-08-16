@@ -10,7 +10,7 @@ public class Main {
 //		StringBuilder sb = new StringBuilder();
 		StringTokenizer st = new StringTokenizer(br.readLine());
 				
-		Integer count = Integer.valueOf(st.nextToken());
+		Integer.valueOf(st.nextToken());
 		Integer queryCount = Integer.valueOf(st.nextToken());
 		long[] sequence = Arrays.stream(br.readLine().split(" ")).mapToLong(Long::valueOf).toArray();
 		Arrays.sort(sequence);
