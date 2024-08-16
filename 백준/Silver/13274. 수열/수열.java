@@ -1,43 +1,38 @@
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
+//		StringBuilder sb = new StringBuilder();
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int n = Integer.parseInt(st.nextToken());
-		int t = Integer.parseInt(st.nextToken());
+				
+		Integer count = Integer.valueOf(st.nextToken());
+		Integer queryCount = Integer.valueOf(st.nextToken());
+		long[] sequence = Arrays.stream(br.readLine().split(" ")).mapToLong(Long::valueOf).toArray();
+		Arrays.sort(sequence);
+		List<int[]> LRX = new ArrayList<>();
 		
-		long[] arr = new long[n];
-		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < n; i++) {
-			arr[i] = Long.parseLong(st.nextToken());
+		for (int i = 0; i < queryCount; i++) {
+			LRX.add(Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::valueOf).toArray());
 		}
-		Arrays.sort(arr);
 		
-		long num;
-		int start, end;
-		while (t-- > 0) {
-			st = new StringTokenizer(br.readLine());
-			start = Integer.parseInt(st.nextToken()) - 1;
-			end = Integer.parseInt(st.nextToken()) - 1;
-			num = Long.parseLong(st.nextToken());
+		for (int[] array : LRX) {
+			int start = array[0] - 1;
+			int end = array[1];
+			int plus = array[array.length - 1];
 			
-			for (int i = start; i <= end; i++) {
-				arr[i] += num;
+			for (int i = start; i < end; i++) {
+				sequence[i] += plus;
 			}
 			
-			Arrays.sort(arr);
+			Arrays.sort(sequence);
 		}
 		
-		for (long m : arr) {
-			sb.append(m).append(" ");
-		}
-		
-		bw.write(sb.toString());
+		bw.write(Arrays.stream(sequence).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
 		bw.flush();
 		bw.close();
 		br.close();
